@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Questionário de Perfil Turístico</title>
+<style>
+    :root {
+        --primary-color: #2c3e50; /* Azul escuro */
+        --secondary-color: #3498db; /* Azul vibrante */
+        --background-color: #f4f7f6; /* Cinza claro suave */
+        --card-background: #ffffff; /* Branco */
+        --border-color: #e0e0e0; /* Cinza para bordas */
+        --text-color: #333333;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background-color);
+        margin: 0;
+        padding: 40px 20px;
+        color: var(--text-color);
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-container {
+        max-width: 800px;
+        width: 100%;
+        background-color: var(--card-background);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        padding: 40px;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        margin-top: 30px;
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: 5px;
+        color: var(--primary-color);
+    }
+
+    fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .question {
+        margin-bottom: 25px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--primary-color);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        box-sizing: border-box;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus,
+    textarea:focus {
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        outline: none;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .range-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .range-container span {
+        width: 80px;
+        text-align: right;
+        font-weight: bold;
+        color: var(--secondary-color);
+    }
+
+    .checkbox-group label {
+        display: inline-block;
+        margin-right: 20px;
+        font-weight: normal;
+        color: var(--text-color);
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        color: var(--card-background);
+        background-color: var(--secondary-color);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-top: 30px;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+    }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Questionário de Perfil Turístico</h1>
+    <form id="tourismSurvey" onsubmit="return sendEmail();">
+
+    <h2>1. Geral sobre Turismo</h2>
+    <fieldset>
+        <div class="question">
+            <label for="freqViagem">1. Com que frequência você viaja para destinos turísticos?</label>
+            <select name="freqViagem" id="freqViagem" required>
+                <option value="">Selecione</option>
+                <option value="Nunca">Nunca</option>
+                <option value="Raramente">Raramente (uma vez por ano ou menos)</option>
+                <option value="Mensalmente">Mensalmente</option>
+                <option value="Semanalmente">Semanalmente</option>
+                <option value="Diversas vezes ao ano">Diversas vezes ao ano</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="motivoViagem">2. Qual o principal motivo das suas viagens?</label>
+            <select name="motivoViagem" id="motivoViagem" required>
+                <option value="">Selecione</option>
+                <option value="Lazer">Lazer</option>
+                <option value="Negócios">Negócios</option>
+                <option value="Família">Família</option>
+                <option value="Saúde">Saúde</option>
+                <option value="Cultura">Cultura</option>
+            </select>
+        </div>
+        <div class="question">
+            <label>3. Quanto você costuma gastar, em média, por viagem?</label>
+            <div class="range-container">
+                <input type="range" name="gastoMedio" id="gastoMedio" min="0" max="10000" step="100" oninput="this.nextElementSibling.innerText = this.value + ' R$'">
+                <span>0 R$</span>
+            </div>
+        </div>
+    </fieldset>
+
+    <h2>2. Específico sobre Viagem</h2>
+    <fieldset>
+        <div class="question">
+            <label for="periodoViagem">4. Quando você costuma viajar?</label>
+            <select name="periodoViagem" id="periodoViagem" required>
+                <option value="">Selecione</option>
+                <option value="Férias">Férias</option>
+                <option value="Finais de semana">Finais de semana</option>
+                <option value="Feriados">Feriados</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="duracaoViagem">5. Quanto tempo costuma durar suas viagens?</label>
+            <select name="duracaoViagem" id="duracaoViagem" required>
+                <option value="">Selecione</option>
+                <option value="1-2 dias">1-2 dias</option>
+                <option value="3-5 dias">3-5 dias</option>
+                <option value="6-10 dias">6-10 dias</option>
+                <option value="Mais de 10 dias">Mais de 10 dias</option>
+            </select>
+        </div>
+        <div class="question">
+            <label>6. Quais fatores são mais importantes na escolha do seu destino?</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="fatores" value="Beleza Natural"> Beleza Natural</label>
+                <label><input type="checkbox" name="fatores" value="História e Cultura"> História e Cultura</label>
+                <label><input type="checkbox" name="fatores" value="Infraestrutura"> Infraestrutura</label>
+                <label><input type="checkbox" name="fatores" value="Preços"> Preços</label>
+                <label><input type="checkbox" name="fatores" value="Segurança"> Segurança</label>
+            </div>
+        </div>
+        <div class="question">
+            <label>7. Qual o seu nível de interesse em experiências culturais, históricas ou naturais?</label>
+            <div class="range-container">
+                <input type="range" name="interesseExperiencias" id="interesseExperiencias" min="1" max="5" oninput="this.nextElementSibling.innerText = this.value">
+                <span>1</span>
+            </div>
+        </div>
+    </fieldset>
+
+    <h2>3. Perfil do Turista</h2>
+    <fieldset>
+        <div class="question">
+            <label for="faixaEtaria">8. Qual sua faixa etária?</label>
+            <select name="faixaEtaria" id="faixaEtaria" required>
+                <option value="">Selecione</option>
+                <option value="18-25">18-25 anos</option>
+                <option value="26-35">26-35 anos</option>
+                <option value="36-45">36-45 anos</option>
+                <option value="46-60">46-60 anos</option>
+                <option value="Acima de 60">Acima de 60 anos</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="paisOrigem">9. Qual seu país de origem?</label>
+            <input type="text" name="paisOrigem" id="paisOrigem" required>
+        </div>
+        <div class="question">
+            <label for="renda">10. Qual sua faixa de renda mensal?</label>
+            <select name="renda" id="renda" required>
+                <option value="">Selecione</option>
+                <option value="Até 2.000 R$">Até 2.000 R$</option>
+                <option value="2.001 - 4.000 R$">2.001 - 4.000 R$</option>
+                <option value="4.001 - 8.000 R$">4.001 - 8.000 R$</option>
+                <option value="Acima de 8.000 R$">Acima de 8.000 R$</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="escolaridade">11. Qual seu nível de escolaridade?</label>
+            <select name="escolaridade" id="escolaridade" required>
+                <option value="">Selecione</option>
+                <option value="Ensino Fundamental">Ensino Fundamental</option>
+                <option value="Ensino Médio">Ensino Médio</option>
+                <option value="Ensino Superior">Ensino Superior</option>
+                <option value="Pós-graduação">Pós-graduação</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="motivacaoPrincipal">12. Qual sua principal motivação para viajar?</label>
+            <select name="motivacaoPrincipal" id="motivacaoPrincipal" required>
+                <option value="">Selecione</option>
+                <option value="Relaxar">Relaxar</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Cultura">Cultura</option>
+                <option value="Natureza">Natureza</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+    </fieldset>
+
+    <h2>Informações adicionais (opcional)</h2>
+    <div class="question">
+        <label for="idade">13. Idade:</label>
+        <input type="number" name="idade" id="idade" min="0" max="120">
+    </div>
+    <div class="question">
+        <label for="comentario">14. Você tem alguma sugestão ou comentário?</label>
+        <textarea name="comentario" id="comentario" rows="4" cols="50"></textarea>
+    </div>
+
+    <button type="submit">Enviar Respostas</button>
+
+    </form>
+</div>
+
+<script>
+    function sendEmail() {
+        const form = document.getElementById('tourismSurvey');
+        const formData = new FormData(form);
+        
+        // Montar tabela de respostas
+        let table = `<table border="1" cellpadding="5" cellspacing="0"><tr>
+        <th>Pergunta</th><th>Resposta</th></tr>`;
+        
+        // Processar perguntas
+        const questions = [
+            ["Frequência de viagem", formData.get('freqViagem')],
+            ["Motivo da viagem", formData.get('motivoViagem')],
+            ["Gasto médio por viagem", formData.get('gastoMedio') + ' R$'],
+            ["Período da viagem", formData.get('periodoViagem')],
+            ["Duração da viagem", formData.get('duracaoViagem')],
+            ["Fatores importantes na escolha", (formData.getAll('fatores') || []).join(', ')],
+            ["Interesse em experiências", formData.get('interesseExperiencias')],
+            ["Faixa etária", formData.get('faixaEtaria')],
+            ["País de origem", formData.get('paisOrigem')],
+            ["Faixa de renda", formData.get('renda')],
+            ["Nível de escolaridade", formData.get('escolaridade')],
+            ["Motivação principal", formData.get('motivacaoPrincipal')],
+            ["Idade", formData.get('idade') || ''],
+            ["Comentário", formData.get('comentario') || '']
+        ];
+
+        questions.forEach(q => {
+            table += `<tr><td>${q[0]}</td><td>${q[1]}</td></tr>`;
+        });
+        table += `</table>`;
+
+        const email = "tiago.adom@gmail.com"; // substitua pelo email desejado
+        const subject = encodeURIComponent("Respostas do Questionário de Perfil Turístico");
+        const body = encodeURIComponent("Segue abaixo as respostas do questionário:\n\n" + table);
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        return false; // Impede envio padrão do form
+    }
+</script>
+
+</body>
+</html>
+```
