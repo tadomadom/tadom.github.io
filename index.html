@@ -1,334 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<title>Questionário de Perfil Turístico</title>
-<style>
-    :root {
-        --primary-color: #2c3e50;
-        --secondary-color: #3498db;
-        --background-color: #f4f7f6;
-        --card-background: #ffffff;
-        --border-color: #e0e0e0;
-        --text-color: #333333;
-    }
-
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--background-color);
-        margin: 0;
-        padding: 40px 20px;
-        color: var(--text-color);
-        display: flex;
-        justify-content: center;
-    }
-
-    .form-container {
-        max-width: 800px;
-        width: 100%;
-        background-color: var(--card-background);
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        padding: 40px;
-        box-sizing: border-box;
-    }
-
-    h1 {
-        text-align: center;
-        color: var(--primary-color);
-        margin-bottom: 10px;
-    }
-
-    h2 {
-        margin-top: 30px;
-        border-bottom: 2px solid var(--secondary-color);
-        padding-bottom: 5px;
-        color: var(--primary-color);
-    }
-
-    fieldset {
-        border: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .question {
-        margin-bottom: 25px;
-        padding: 15px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-    }
-
-    label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 8px;
-        color: var(--primary-color);
-    }
-
-    input[type="text"],
-    input[type="number"],
-    select,
-    textarea {
-        width: 100%;
-        padding: 12px;
-        margin-top: 5px;
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-        box-sizing: border-box;
-        transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    input[type="text"]:focus,
-    input[type="number"]:focus,
-    select:focus,
-    textarea:focus {
-        border-color: var(--secondary-color);
-        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        outline: none;
-    }
-
-    input[type="range"] {
-        width: 100%;
-        cursor: pointer;
-    }
-
-    .range-container {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .range-container span {
-        width: 80px;
-        text-align: right;
-        font-weight: bold;
-        color: var(--secondary-color);
-    }
-
-    .checkbox-group label {
-        display: inline-block;
-        margin-right: 20px;
-        font-weight: normal;
-        color: var(--text-color);
-    }
-
-    button {
-        width: 100%;
-        padding: 15px;
-        font-size: 18px;
-        font-weight: bold;
-        color: var(--card-background);
-        background-color: var(--secondary-color);
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
-        margin-top: 30px;
-    }
-
-    button:hover {
-        background-color: #2980b9;
-        transform: translateY(-2px);
-    }
-
-    .success-message {
-        display: none;
-        text-align: center;
-        padding: 20px;
-        background-color: #d4edda;
-        color: #155724;
-        border-radius: 8px;
-        margin-top: 20px;
-    }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>América Latina com GeoNames</title>
+  <style>
+    body{font-family:sans-serif;max-width:800px;margin:30px auto;padding:0 16px}
+    label{display:block;margin-top:12px;font-weight:bold}
+    select{width:100%;padding:8px;margin-top:4px}
+    .info{font-size:0.85em;color:#555;margin-top:4px}
+  </style>
 </head>
 <body>
+  <h1>Países da América Latina (via GeoNames)</h1>
 
-<div class="form-container">
-    <h1 id="form-title">Questionário de Perfil Turístico</h1>
-    <form id="tourismSurvey" action="https://formspree.io/f/mnngaqaw" method="POST">
+  <label for="country">País</label>
+  <select id="country">
+    <option value="">Carregando países...</option>
+  </select>
+  <div class="info" id="countryInfo"></div>
 
-    <h2>1. Geral sobre Turismo</h2>
-    <fieldset>
-        <div class="question">
-            <label for="freqViagem">1. Com que frequência você viaja para destinos turísticos?</label>
-            <select name="freqViagem" id="freqViagem" required>
-                <option value="">Selecione</option>
-                <option value="Nunca">Nunca</option>
-                <option value="Raramente">Raramente (uma vez por ano ou menos)</option>
-                <option value="Mensalmente">Mensalmente</option>
-                <option value="Semanalmente">Semanalmente</option>
-                <option value="Diversas vezes ao ano">Diversas vezes ao ano</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="motivoViagem">2. Qual o principal motivo das suas viagens?</label>
-            <select name="motivoViagem" id="motivoViagem" required>
-                <option value="">Selecione</option>
-                <option value="Lazer">Lazer</option>
-                <option value="Negócios">Negócios</option>
-                <option value="Família">Família</option>
-                <option value="Saúde">Saúde</option>
-                <option value="Cultura">Cultura</option>
-            </select>
-        </div>
-        <div class="question">
-            <label>3. Quanto você costuma gastar, em média, por viagem?</label>
-            <div class="range-container">
-                <input type="range" name="gastoMedio" id="gastoMedio" min="0" max="10000" step="100" oninput="this.nextElementSibling.innerText = 'R$ ' + this.value">
-                <span>R$ 0</span>
-            </div>
-        </div>
-    </fieldset>
+  <label for="state">Estado/Província</label>
+  <select id="state" disabled>
+    <option value="">Selecione um país</option>
+  </select>
+  <div class="info" id="stateInfo"></div>
 
-    <h2>2. Específico sobre Viagem</h2>
-    <fieldset>
-        <div class="question">
-            <label for="periodoViagem">4. Quando você costuma viajar?</label>
-            <select name="periodoViagem" id="periodoViagem" required>
-                <option value="">Selecione</option>
-                <option value="Férias">Férias</option>
-                <option value="Finais de semana">Finais de semana</option>
-                <option value="Feriados">Feriados</option>
-                <option value="Outro">Outro</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="duracaoViagem">5. Quanto tempo costuma durar suas viagens?</label>
-            <select name="duracaoViagem" id="duracaoViagem" required>
-                <option value="">Selecione</option>
-                <option value="1-2 dias">1-2 dias</option>
-                <option value="3-5 dias">3-5 dias</option>
-                <option value="6-10 dias">6-10 dias</option>
-                <option value="Mais de 10 dias">Mais de 10 dias</option>
-            </select>
-        </div>
-        <div class="question">
-            <label>6. Quais fatores são mais importantes na escolha do seu destino?</label>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="fatores[]" value="Beleza Natural"> Beleza Natural</label>
-                <label><input type="checkbox" name="fatores[]" value="História e Cultura"> História e Cultura</label>
-                <label><input type="checkbox" name="fatores[]" value="Infraestrutura"> Infraestrutura</label>
-                <label><input type="checkbox" name="fatores[]" value="Preços"> Preços</label>
-                <label><input type="checkbox" name="fatores[]" value="Segurança"> Segurança</label>
-            </div>
-        </div>
-        <div class="question">
-            <label>7. Qual o seu nível de interesse em experiências culturais, históricas ou naturais?</label>
-            <div class="range-container">
-                <input type="range" name="interesseExperiencias" id="interesseExperiencias" min="1" max="5" oninput="this.nextElementSibling.innerText = this.value">
-                <span>1</span>
-            </div>
-        </div>
-    </fieldset>
+  <label for="city">Cidade</label>
+  <select id="city" disabled>
+    <option value="">Selecione um estado</option>
+  </select>
+  <div class="info" id="cityInfo"></div>
 
-    <h2>3. Perfil do Turista</h2>
-    <fieldset>
-        <div class="question">
-            <label for="faixaEtaria">8. Qual sua faixa etária?</label>
-            <select name="faixaEtaria" id="faixaEtaria" required>
-                <option value="">Selecione</option>
-                <option value="18-25">18-25 anos</option>
-                <option value="26-35">26-35 anos</option>
-                <option value="36-45">36-45 anos</option>
-                <option value="46-60">46-60 anos</option>
-                <option value="Acima de 60">Acima de 60 anos</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="paisOrigem">9. Qual seu país de origem?</label>
-            <input type="text" name="paisOrigem" id="paisOrigem" required>
-        </div>
-        <div class="question">
-            <label for="renda">10. Qual sua faixa de renda mensal?</label>
-            <select name="renda" id="renda" required>
-                <option value="">Selecione</option>
-                <option value="Até 2.000 R$">Até 2.000 R$</option>
-                <option value="2.001 - 4.000 R$">2.001 - 4.000 R$</option>
-                <option value="4.001 - 8.000 R$">4.001 - 8.000 R$</option>
-                <option value="Acima de 8.000 R$">Acima de 8.000 R$</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="escolaridade">11. Qual seu nível de escolaridade?</label>
-            <select name="escolaridade" id="escolaridade" required>
-                <option value="">Selecione</option>
-                <option value="Ensino Fundamental">Ensino Fundamental</option>
-                <option value="Ensino Médio">Ensino Médio</option>
-                <option value="Ensino Superior">Ensino Superior</option>
-                <option value="Pós-graduação">Pós-graduação</option>
-            </select>
-        </div>
-        <div class="question">
-            <label for="motivacaoPrincipal">12. Qual sua principal motivação para viajar?</label>
-            <select name="motivacaoPrincipal" id="motivacaoPrincipal" required>
-                <option value="">Selecione</option>
-                <option value="Relaxar">Relaxar</option>
-                <option value="Aventura">Aventura</option>
-                <option value="Cultura">Cultura</option>
-                <option value="Natureza">Natureza</option>
-                <option value="Outro">Outro</option>
-            </select>
-        </div>
-    </fieldset>
+  <script>
+    // 🔑 Substitua por seu username em geonames.org
+    const USERNAME = "tadom"; // ←←← IMPORTANTE!
 
-    <h2>Informações adicionais (opcional)</h2>
-    <div class="question">
-        <label for="idade">13. Idade:</label>
-        <input type="number" name="idade" id="idade" min="0" max="120">
-    </div>
-    <div class="question">
-        <label for="comentario">14. Você tem alguma sugestão ou comentário?</label>
-        <textarea name="comentario" id="comentario" rows="4" cols="50"></textarea>
-    </div>
+    const latinCountryCodes = ["AR","BO","BR","CL","CO","CR","CU","DO","EC","SV","GT","HN","MX","NI","PA","PY","PE","PR","UY","VE"];
 
-    <button type="submit">Enviar Respostas</button>
+    const countrySelect = document.getElementById("country");
+    const stateSelect = document.getElementById("state");
+    const citySelect = document.getElementById("city");
 
-    </form>
-    <div id="successMessage" class="success-message">
-        <p>✅ Obrigado por participar! Suas respostas foram enviadas com sucesso.</p>
-    </div>
-</div>
+    // Carregar países
+    async function loadCountries() {
+      try {
+        const res = await fetch(`http://api.geonames.org/countryInfoJSON?username=${USERNAME}&lang=pt&style=short`);
+        const data = await res.json();
+        const countries = data.geonames.filter(c => latinCountryCodes.includes(c.countryCode));
+        countries.sort((a, b) => a.countryName.localeCompare(b.countryName, 'pt'));
 
-<script>
-    const form = document.getElementById('tourismSurvey');
-    const successMessage = document.getElementById('successMessage');
-
-    form.addEventListener('submit', async function(event) {
-        event.preventDefault();
-
-        // Faz o submit do formulário para o Formspree
-        const response = await fetch(form.action, {
-            method: form.method,
-            body: new FormData(form),
-            headers: {
-                'Accept': 'application/json'
-            }
+        countrySelect.innerHTML = '<option value="">-- selecione --</option>';
+        countries.forEach(c => {
+          const opt = document.createElement("option");
+          opt.value = c.countryCode;
+          opt.textContent = c.countryName;
+          opt.dataset.geonameId = c.geonameId;
+          countrySelect.appendChild(opt);
         });
+        document.getElementById("countryInfo").textContent = `Países: ${countries.length}`;
+      } catch (e) {
+        countrySelect.innerHTML = '<option>Erro ao carregar</option>';
+        console.error(e);
+      }
+    }
 
-        if (response.ok) {
-            // Se o envio for bem-sucedido, esconde o formulário e mostra a mensagem
-            form.style.display = 'none';
-            successMessage.style.display = 'block';
-        } else {
-            // Caso de erro, exibe um alerta
-            alert('Houve um problema ao enviar o formulário. Por favor, tente novamente.');
+    // Carregar estados (admin1)
+    async function loadStates(countryCode) {
+      stateSelect.disabled = true;
+      stateSelect.innerHTML = '<option>Carregando...</option>';
+      try {
+        const res = await fetch(`http://api.geonames.org/adminJSON?country=${countryCode}&username=${USERNAME}&lang=pt`);
+        const states = await res.json();
+        if (!states || !states.length) {
+          stateSelect.innerHTML = '<option>Nenhum estado encontrado</option>';
+          return;
         }
+        stateSelect.disabled = false;
+        stateSelect.innerHTML = '<option>-- selecione um estado --</option>';
+        states.forEach(s => {
+          const opt = document.createElement("option");
+          opt.value = s.adminCode1;
+          opt.textContent = s.name;
+          opt.dataset.geonameId = s.geonameId;
+          stateSelect.appendChild(opt);
+        });
+        document.getElementById("stateInfo").textContent = `Estados: ${states.length}`;
+      } catch (e) {
+        stateSelect.innerHTML = '<option>Erro ao carregar estados</option>';
+        console.error(e);
+      }
+    }
+
+    // Carregar cidades (featureClass=P, pop > 0)
+    async function loadCities(geonameId) {
+      citySelect.disabled = true;
+      citySelect.innerHTML = '<option>Carregando...</option>';
+      try {
+        const res = await fetch(
+          `http://api.geonames.org/childrenJSON?geonameId=${geonameId}&username=${USERNAME}&featureClass=P&lang=pt&maxRows=100`
+        );
+        const data = await res.json();
+        const cities = data.geonames || [];
+        if (!cities.length) {
+          citySelect.innerHTML = '<option>Nenhuma cidade encontrada</option>';
+          return;
+        }
+        citySelect.disabled = false;
+        citySelect.innerHTML = '<option>-- selecione uma cidade --</option>';
+        cities.forEach(c => {
+          const opt = document.createElement("option");
+          opt.value = c.name;
+          opt.textContent = c.name;
+          citySelect.appendChild(opt);
+        });
+        document.getElementById("cityInfo").textContent = `Cidades: ${cities.length}`;
+      } catch (e) {
+        citySelect.innerHTML = '<option>Erro ao carregar cidades</option>';
+        console.error(e);
+      }
+    }
+
+    // Eventos
+    countrySelect.addEventListener("change", (e) => {
+      const code = e.target.value;
+      if (!code) {
+        stateSelect.innerHTML = '<option>Selecione um país</option>';
+        citySelect.innerHTML = '<option>Selecione um estado</option>';
+        stateSelect.disabled = true;
+        citySelect.disabled = true;
+        return;
+      }
+      loadStates(code);
     });
 
-    // Atualiza o valor do range de gasto médio
-    const gastoMedioInput = document.getElementById('gastoMedio');
-    const gastoMedioSpan = gastoMedioInput.nextElementSibling;
-    gastoMedioSpan.innerText = 'R$ ' + gastoMedioInput.value;
-</script>
+    stateSelect.addEventListener("change", (e) => {
+      const geonameId = e.target.selectedOptions[0]?.dataset?.geonameId;
+      if (!geonameId) {
+        citySelect.innerHTML = '<option>Selecione um estado</option>';
+        citySelect.disabled = true;
+        return;
+      }
+      loadCities(geonameId);
+    });
 
+    // Iniciar
+    loadCountries();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
